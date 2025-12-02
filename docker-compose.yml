@@ -2,31 +2,39 @@ services:
   php:
     image: tuhinsu/laravel-psql:latest
     restart: unless-stopped
-    container_name: upms
-    hostname: upms
+    container_name: ${PROJECT_NAME}-laravel
+    hostname: ${PROJECT_NAME}
     user: vscode
     command: "sh -c '/start.sh'"
     volumes:
-      - ./upms:/upms
+      - ./${PROJECT_NAME}:/${PROJECT_NAME}
       - ./db_backups:/db_backup:ro
       - ./start.sh:/start.sh:ro
-    working_dir: /upms
+    working_dir: /${PROJECT_NAME}
+
+    environment:
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+
     depends_on:
       - db
 
   db:
     image: postgis/postgis:17-master
     restart: unless-stopped
-    container_name: upms-db
-    hostname: db
+    container_name: ${PROJECT_NAME}-db
+    hostname: ${PROJECT_NAME}-db
     environment:
-      POSTGRES_USER: upms
-      POSTGRES_PASSWORD: upms@1234
-      POSTGRES_DB: upms
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
     logging:
       driver: "none"
 
   redis:
     image: redis:latest
     restart: unless-stopped
-    container_name: redis.test
+    container_name: ${PROJECT_NAME}-redis
+    hostname: ${PROJECT_NAME}-redis
