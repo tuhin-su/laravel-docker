@@ -199,4 +199,6 @@ php artisan tinker --execute="
 # 9. Start Laravel Server
 ################################################################################
 echo "🚀 Starting Laravel HTTP server..."
-php artisan serve --host 0.0.0.0 --port 80
+sudo bash -c 'echo "php artisan serve --host 0.0.0.0 --port 80" > /bin/start'
+sudo chmod +x /bin/start
+sleep infinity
