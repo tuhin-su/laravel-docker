@@ -1,6 +1,6 @@
 services:
   php:
-    image: tuhinsu/laravel-psql:latest
+    image: docker.io/tuhinsu/laravel-psql:latest
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-laravel
     hostname: ${PROJECT_NAME}
@@ -23,7 +23,7 @@ services:
       - db
 
   db:
-    image: postgis/postgis:17-master
+    image: docker.io/postgis/postgis:17-master
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-db
     hostname: ${PROJECT_NAME}-db
@@ -38,7 +38,7 @@ services:
       - "5432:5432"
       
   pgadmin:
-    image: dpage/pgadmin4
+    image: docker.io/dpage/pgadmin4
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-pgadmin
     hostname: ${PROJECT_NAME}-pgadmin
@@ -53,7 +53,7 @@ services:
       - db
 
   redis:
-    image: redis:latest
+    image: docker.io/redis:latest
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-redis
     hostname: ${PROJECT_NAME}-redis
