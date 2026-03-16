@@ -4,10 +4,11 @@ services:
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-laravel
     hostname: ${PROJECT_NAME}
+    userns_mode: keep-id
     user: vscode
     command: "sh -c '/start.sh'"
     volumes:
-      - ./${PROJECT_NAME}:/${PROJECT_NAME}
+      - ./${PROJECT_NAME}:/${PROJECT_NAME}:Z
       - ./db_backups:/db_backup:ro
       - ./start.sh:/start.sh:ro
     working_dir: /${PROJECT_NAME}
