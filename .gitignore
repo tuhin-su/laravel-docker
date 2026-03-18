@@ -1,4 +1,7 @@
 upms
 db_backups/*.sql.xz
 .env
-ees
+./ees
+.vscode
+.vscode_extensions
+./pgadmin
