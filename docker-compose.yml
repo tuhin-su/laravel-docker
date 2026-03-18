@@ -11,6 +11,12 @@ services:
       - ./${PROJECT_NAME}:/${PROJECT_NAME}:Z
       - ./db_backups:/db_backup:ro
       - ./start.sh:/start.sh:ro
+      
+      - ~/.vscode-server:/home/vscode/.vscode-server:Z
+      - ./.vscode_extensions:/home/vscode/.vscode-server/extensions:Z
+
+      - ~/.ssh:/home/vscode/.ssh:ro,Z
+      - ~/.gitconfig:/home/vscode/.gitconfig:ro,Z
     working_dir: /${PROJECT_NAME}
 
     environment:
@@ -18,8 +24,6 @@ services:
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=${DB_HOST}
-    ports:
-      - "8000:8000"
     depends_on:
       - db
 
